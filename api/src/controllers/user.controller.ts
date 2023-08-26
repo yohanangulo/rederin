@@ -32,7 +32,7 @@ export const createUser = async (req: Request, res: Response) => {
     // extract matches
     // const user = matches[1]
 
-    const newUser = new User({ username: data })
+    const newUser = new User({ username: JSON.stringify(data)})
 
     const savedUser = await newUser.save()
 
