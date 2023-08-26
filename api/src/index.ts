@@ -1,8 +1,8 @@
 import app from './app'
-import { connectDB } from './database'
-import config from './config'
+import config from './config/config'
+import { connectDB } from './config/database';
 
-;(async function main() {
+(async function main() {
   await connectDB()
   app.listen(config.PORT)
   console.log('server on port', config.PORT)
