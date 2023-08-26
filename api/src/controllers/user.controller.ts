@@ -13,6 +13,8 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const createUser = async (req: Request, res: Response) => {
   try {
+    console.log(req.body)
+
     const { data }: { data: string } = req.body
 
     // check if this is a new pppoe secret added
