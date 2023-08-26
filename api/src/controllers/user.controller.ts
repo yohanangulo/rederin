@@ -13,13 +13,16 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-
-    const { data } = await req.body
+    const { data }: { data: string } = req.body
 
     console.log(req.body)
 
     // check if this is a new pppoe secret added
-    if (!data.includes('ppp') || !data.includes('secret') || !data.includes('added')) {
+    if (
+      !data.includes('ppp') ||
+      !data.includes('secret') ||
+      !data.includes('added')
+    ) {
       return res.status(400).send('Invalid entry')
     }
 
@@ -39,7 +42,6 @@ export const createUser = async (req: Request, res: Response) => {
     const savedUser = await newUser.save()
 
     res.json(savedUser)
-
   } catch (error: any) {
     res.status(500).send('An erro has ocurred: ' + error.message)
     console.error(error)
