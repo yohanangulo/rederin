@@ -14,7 +14,9 @@ export const getAllUsers = async (req: Request, res: Response) => {
 export const createUser = async (req: Request, res: Response) => {
   try {
 
-    const { data } = req.body
+    const { data } = await req.body
+
+    console.log(req.body)
 
     // check if this is a new pppoe secret added
     if (!data.includes('ppp') || !data.includes('secret') || !data.includes('added')) {
