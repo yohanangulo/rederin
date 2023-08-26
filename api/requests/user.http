@@ -1,5 +1,13 @@
 ### Get all users
-GET http://localhost:3003/users
+GET http://localhost:3003/api/users
 
 ### create user
-POST http://localhost:3003/users 
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+  "data" : "ppp secret <Erin.Jose300> added by ejau15"
+}
+
+### delete user
+DELETE http://localhost:3003/api/users/64e9ec55c6d2967ce461da62

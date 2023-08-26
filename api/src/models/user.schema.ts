@@ -6,6 +6,10 @@ const userSchema = new Schema(
       type: String,
       require: true,
     },
+    tracked: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
