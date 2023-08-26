@@ -39,8 +39,8 @@ export const createUser = async (req: Request, res: Response) => {
 
     res.json(savedUser)
 
-  } catch (error) {
-    res.status(500).send('An erro has ocurred')
+  } catch (error: any) {
+    res.status(500).send('An erro has ocurred: ' + error.message)
     console.error(error)
   }
 }
