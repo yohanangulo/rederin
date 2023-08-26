@@ -14,25 +14,25 @@ export const getAllUsers = async (req: Request, res: Response) => {
 export const createUser = async (req: Request, res: Response) => {
   try {
 
-    const data  = req.body
+    const { data } = req.body
 
     // check if this is a new pppoe secret added
-    // if (!data.includes('ppp') || !data.includes('secret') || !data.includes('added')) {
-    //   return res.status(400).send('Invalid entry')
-    // }
+    if (!data.includes('ppp') || !data.includes('secret') || !data.includes('added')) {
+      return res.status(400).send('Invalid entry')
+    }
 
     // find user between angle brackets
-    // const matches = data.match(/<([^>]+)>/)
+    const matches = data.match(/<([^>]+)>/)
 
     // check if matches were found
-    // if (matches == null) {
-    //   return res.status(400).send('Invalid entry')
-    // }
+    if (matches == null) {
+      return res.status(400).send('Invalid entry')
+    }
 
     // extract matches
-    // const user = matches[1]
+    const user = matches[1]
 
-    const newUser = new User({ username: JSON.stringify(data)})
+    const newUser = new User({ username: user })
 
     const savedUser = await newUser.save()
 
