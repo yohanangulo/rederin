@@ -13,9 +13,8 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-    // console.log('este es el body', req.body)
 
-    // const { data }: { data: string } = req.body
+    const data  = req.body
 
     // check if this is a new pppoe secret added
     // if (!data.includes('ppp') || !data.includes('secret') || !data.includes('added')) {
@@ -33,7 +32,7 @@ export const createUser = async (req: Request, res: Response) => {
     // extract matches
     // const user = matches[1]
 
-    const newUser = new User({ username: "success "})
+    const newUser = new User({ username: data })
 
     const savedUser = await newUser.save()
 
