@@ -13,7 +13,11 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-    const { data, logTime }: { data: string; logTime: string } = req.body
+    const {
+      data,
+      logTime,
+      mkName,
+    }: { data: string; logTime: string; mkName: string } = req.body
 
     // check if this is a new pppoe secret added
     if (
@@ -43,7 +47,7 @@ export const createUser = async (req: Request, res: Response) => {
     // extract matches
     const user = matches[1]
 
-    const newUser = new User({ username: user, mikrotikTime: logTime })
+    const newUser = new User({ username: user, mikrotikTime: logTime, mkName })
 
     const savedUser = await newUser.save()
 

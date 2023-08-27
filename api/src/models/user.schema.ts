@@ -10,6 +10,9 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    mkName: {
+      type: String
+    },
     mikrotikTime: {
       type: String
     }

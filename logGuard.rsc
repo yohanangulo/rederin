@@ -3,11 +3,12 @@
 :foreach i in=$loglist do={ \
   :local logMessage [/log get $i message]; \
   :local eventTime [/log get $i time]; \
+  :local mkName [/system identity get name]; \
 
   tool fetch url="api" \
   output=user \
   http-method=post \
-  http-data="{\"data\": \"$logMessage\", \"logTime\": \"$eventTime\" }" \
+  http-data="{\"data\": \"$logMessage\", \"logTime\": \"$eventTime\", \"mkName\":\"$mkName\" }" \
   http-header-field="content-type: application/json";
 
 }
