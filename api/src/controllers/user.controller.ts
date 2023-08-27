@@ -13,9 +13,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-    const { data }: { data: string } = req.body
-
-    console.log(req.body)
+    const { data, logTime }: { data: string; logTime: string } = req.body
 
     // check if this is a new pppoe secret added
     if (
@@ -24,6 +22,14 @@ export const createUser = async (req: Request, res: Response) => {
       !data.includes('added')
     ) {
       return res.status(400).send('Invalid entry')
+    }
+
+    // check if log time already exists to prevent a user duplication
+
+    const userFound = await User.findOne({ mikrotikTime: logTime })
+
+    if (userFound) {
+      return res.status(202).json({ message: 'it seems user already exists' })
     }
 
     // find user between angle brackets
@@ -37,7 +43,7 @@ export const createUser = async (req: Request, res: Response) => {
     // extract matches
     const user = matches[1]
 
-    const newUser = new User({ username: user })
+    const newUser = new User({ username: user, mikrotikTime: logTime })
 
     const savedUser = await newUser.save()
 
