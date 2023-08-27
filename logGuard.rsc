@@ -1,12 +1,19 @@
 :local loglist [:toarray [/log find message~"ppp secret" and message~"added by"]]; \
 
-  :foreach i in=$loglist do={ \
-    :local logMessage [/log get $i message]; \
-    ## remember set a delay time after each API call
+:foreach i in=$loglist do={ \
+  :local logMessage [/log get $i message]; \
+  :local eventTime [/log get $i time]; \
 
-    put $logMessage; \
-  }
+  tool fetch url="api" \
+  output=user \
+  http-method=post \
+  http-data="{\"data\": \"$logMessage\", \"logTime\": \"$eventTime\" }" \
+  http-header-field="content-type: application/json";
+
+}
   
+
+    ## remember set a delay time after each API call
 
   ### request example
 tool fetch url="api" \
